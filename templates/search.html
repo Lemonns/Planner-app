@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="../static/search_styles.css"/>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search</title>
+</head>
+<body>
+    
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">Name's Profile</div>
+            <ul>
+                <li><a href="{{ url_for('search') }}">Search</a></li>
+                <li><a href="{{ url_for('profile') }}">Profile</a></li>
+                <li><a href="{{ url_for('home_page') }}">Home</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+<div class="search-container">
+    <h1>Find a Restaurant/Business/Store</h1>
+    <form action="{{ url_for('search') }}" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input id="search" type="text" name="user_query" placeholder="Enter a search term">
+        <input id="location" type="text" name="location" placeholder="Enter a location">
+        <input id="radius" type="text" name="radius" placeholder="Radius in miles (25 max)">
+        <label for="limit">Limit</label>
+        <select name="number" id="howmany">
+            <option value="0">0</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="40">40</option>
+            <option value="50">50</option>
+        </select>
+        <input type="submit" value="Submit" /> 
+    </form>
+</div> 
+</body>
+</html>

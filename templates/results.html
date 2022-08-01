@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="../static/styles.css"/>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+</head>
+<body>
+    <h1>Results</h1> <a href="{{ url_for('search')}}">Back To Search</a> 
+    <a href="{{ url_for('profile') }}">Profile</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
+    {% for i in data['businesses'] %}
+    <div class="restaurantCard">
+        <img src="{{ i['image_url'] }}" alt="image of business" />
+        <a href="{{ i['url'] }}" target="_blank"><h3>{{ i['name'] }}</h3></a>
+        <p>{{ i['location']['address1'] }} {{ i['location']['city'] }}</p>
+        <p>Rating: {{ i['rating'] }}</p>
+        <a href="{{ url_for('add', store_id=i['id'], user_=current_user) }}"><button>Add</button></a>
+        <a href="{{ url_for('login', id=i['id']) }}">W</a>
+    </div>
+    {% endfor %}
+</body>
+</html>

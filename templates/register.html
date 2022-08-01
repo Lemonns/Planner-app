@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<body>
+    {% block content %}
+    <h1>Register an Account</h1>
+    <form action="/register" method="POST">
+        <!-- <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"> --> <!-- Can use this instead of {{ form.csrf_token }}-->
+        {{ form.csrf_token }}
+        {{ form.email.label }}
+        {{ form.email() }}
+
+        {{ form.password.label }}
+        {{ form.password() }}
+
+        {{ form.name.label }}
+        {{ form.name()}}
+
+        {{ form.submit() }}
+        
+    </form>
+
+    
+    
+    {% endblock %}
+</body>
+</html>

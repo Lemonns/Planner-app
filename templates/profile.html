@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="../static/profile.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">{{ user.name }}'s Profile</div>
+            <ul>
+                <li><a href="{{ url_for('search') }}">Search</a></li>
+                <li><a href="{{ url_for('home_page') }}">Home</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+    <h1 style="margin-top: 10px;">Places to Visit</h1>
+<div class="store-container">
+    {% for i in user.stores %}
+    <div class="store-info">
+        <div class="store">
+            <img src="{{ i['img_url'] }}" alt="image of business" />
+            <a class="click-link" href="{{ i['store_url'] }}"><p class="store-name">{{ i.store_name }}</p></a>
+            <p class="time">{{ i.time }}</p>
+            <p class="visit-date">{{ i.visit_date }}</p> 
+            <a class="ED" href="{{ url_for('edit', store_edit=i.id) }}">Edit</a> 
+            <a class="ED" href="{{ url_for('delete', store_del=i.id) }}">Delete</a>
+        </div>
+    </div> 
+    {% endfor %}
+</div>
+
+</body>
+</html>
