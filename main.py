@@ -1,4 +1,4 @@
-
+from dotenv import load_dotenv
 from flask import Flask, flash, render_template, redirect, url_for, request, session, abort
 from httpx import StatusCode
 import requests
@@ -9,30 +9,26 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from form_data import RegisterForm, LoginForm, EditForm
 from flask_wtf.csrf import CSRFProtect
 from flask_session import Session
+import os
 
-API_KEY = "NLGp3hN-WBLlHLuBoNGYlWqa39IbdaOPPulyELXSzZ5v5ns4JyCatNhyPDSr1fSxvJDGPCEapGBj-x-V1Q9eJtjG02prc6NlDS2LnoYunPz6ilAo2lhXGJhSNdTVYnYx"
+load_dotenv()
+
+API_KEY = os.getenv("API_KEY")
 ENDPOINT = "https://api.yelp.com/v3/businesses/search"
 ID_SEARCH_ENDPOINT = "https://api.yelp.com/v3/businesses/"
 HEADERS = {
     "Authorization": 'bearer %s' %API_KEY
 }
 
-#Use another python file to import the stuff below instead of having it here
+
 app = Flask(__name__)
 csrf = CSRFProtect(app)
 csrf.init_app(app)
-app.secret_key = 'j872fh#hq87fjh9aw@'
-app.config['SECRET_KEY'] = 'super secret'
+app.secret_key = os.getenv("SECRET_KEY")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///users.db"
 db = SQLAlchemy(app)
 
-#SESSION_TYPE = 'redis'
-#app.config.from_object(__name__)
-#Session(app)
-
-#sess = Session()
-#sess.init_app(app)
 
 class Users(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True) 
